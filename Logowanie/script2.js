@@ -1,15 +1,19 @@
-const logout = document.getElementById('logout');
-
+const logoutButton = document.getElementById('logout');
 
 // Sprawdzenie, czy użytkownik jest zalogowany
 if (localStorage.getItem("isAuthenticated") !== "true") {
-// Jeśli nie, przekierowanie z powrotem na stronę logowania
+    // Jeśli nie, przekierowanie z powrotem na stronę logowania
     window.location.href = "index.html";
+} else {
+    // Ustawienie timera do automatycznego wylogowania po 10 sekundach
+    setTimeout(() => {
+        localStorage.removeItem("isAuthenticated");
+        window.location.href = "index.html";
+    }, 10000); // 10 sekund
 }
 
-logout = localStorage.removeItem("isAuthenticated");
-
-if(logout){
+// Obsługa wylogowania po kliknięciu przycisku
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem("isAuthenticated");
     window.location.href = "index.html";
-}
-
+});
